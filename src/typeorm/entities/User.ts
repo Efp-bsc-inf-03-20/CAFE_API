@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn, getRepository } from "typeorm";
 
 @Entity({name:'users'})
 export class User{
@@ -17,47 +17,6 @@ export class User{
     @Column()
     createdAt:Date;
 
-    @Column({nullable:true})
-    authstrategy:string;
+ 
 
 }
-/*
-@Entity({name:'cafeA'})
-export class CAFE_A{
-    @PrimaryGeneratedColumn()
-    order_ID:number;
-
-    @Column({unique:true})
-    Food_Type:string;
-
-    @Column()
-     phone_number:string;
-
-    @Column()
-    Location:string;
-
-    @Column({default:new Date()})
-    Order_Date:Date;
-
-
-}
-@Entity({name:'cafeB'})
-export class CAFE_B{
-    @PrimaryGeneratedColumn()
-    order_ID:number;
-
-    @Column({unique:true})
-    Food_Type:string;
-
-    @Column()
-     phone_number:string;
-
-    @Column()
-    Location:string;
-
-    @Column({default:new Date()})
-    Order_Date:Date;
-
-
-}
-*/

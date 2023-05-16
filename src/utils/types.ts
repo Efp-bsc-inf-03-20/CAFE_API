@@ -10,17 +10,3 @@ export type UpdateUserparams = {
     email:string;
  
 }
-export type CreateOrderparams = {
-    orderId:number;
-    foodtype:string;
-    phonenumber:string;
-    location:string;
- 
-}
-export type UpdateOrderparams = {
-    orderId:number;
-    foodtype:string;
-    phonenumber:string;
-    location:string;
- 
-}
