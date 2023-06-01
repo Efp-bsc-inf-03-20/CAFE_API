@@ -1,7 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, AfterInsert } from 'typeorm';
-import { google } from 'googleapis';
+import { Entity, PrimaryGeneratedColumn, Column, AfterInsert, ManyToOne, JoinColumn } from 'typeorm';
 
-@Entity({ name: 'cafeA' })
+
+import { google } from 'googleapis';
+import { User } from './User';
+
+@Entity({ name: 'cafeB' })
 export class CafeA {
   @PrimaryGeneratedColumn()
   orderid: number;
@@ -18,11 +21,18 @@ export class CafeA {
   @Column()
   paymentmethod: string;
 
-  @Column({ nullable: true }) // Allow null values for the email column
-  email: string | null;
+  @Column({ nullable: true })
+  email: string|null ;
 
   @Column({ default: new Date() })
   orderedAt: Date;
+
+  @ManyToOne(() => User, user => user.cafeBs)
+  @JoinColumn({ name: 'username', referencedColumnName: 'username' })
+
+  user: User;
+
+ 
 
   @AfterInsert()
   async sendNotification() {
@@ -31,14 +41,14 @@ export class CafeA {
       const credentials = {
         client_id: '945057323641-9398cr0bfvkj5a0arnjq539ermva23ou.apps.googleusercontent.com',
         client_secret: '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',
-        redirect_uris: ['YOUR_REDIRECT_URI'],
-        refresh_token: 'YOUR_REFRESH_TOKEN',
+        redirect_uris: ['http://localhost:3000/cafeBorders','https://localhost:3000/cafeAorders','http://localhost:3000/users'],
+        refresh_token: '1//xEoDL4iW3cxlI7yDbSRFYNG01kVKM2C-259HOF2aQbI',
       };
 
       const oauth2Client = new google.auth.OAuth2(
         credentials.client_id,
         credentials.client_secret,
-        credentials.redirect_uris[0]
+        credentials.redirect_uris[3]
       );
 
       oauth2Client.setCredentials({ refresh_token: credentials.refresh_token });
